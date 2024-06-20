@@ -12,7 +12,7 @@ class TradingStrategy(Strategy):
     def interval(self):
         # Define the time interval for data collection
         return "1day"
-    
+    log(data["ohlcv"][0])
     def run(self, data):
         # Get the historical closing prices for SPY
         spy_prices = [i["SPY"]["close"] for i in data["ohlcv"]]
