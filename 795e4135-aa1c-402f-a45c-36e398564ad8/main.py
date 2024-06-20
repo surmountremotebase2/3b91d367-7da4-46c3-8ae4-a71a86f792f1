@@ -22,8 +22,8 @@ class TradingStrategy(Strategy):
 
         # Get the daily openings
         daily_opens = [i["SPY"]["open"] for i in d if open_time in i["SPY"]["date"]]
-        log(str([i["SPY"] for i in d[-10:]]))
-        log(str(daily_opens))
+        #log(str([i["SPY"] for i in d[-10:]]))
+        #log(str(daily_opens))
         prior_daily_opens = daily_opens[-15:-1]
         current_daily_open = daily_opens[-1]
 
@@ -48,7 +48,7 @@ class TradingStrategy(Strategy):
             allocation = {"SPY": 1.0}
 
         elif len(prior_daily_opens) != 14 or len(prior_same_time_prices) != 14:
-            log("Not enough data to lookback")
+            log("Not enough data to lookback ({0}, {1})".format(len(prior_daily_opens), len(prior_same_time_prices))
             allocation = {"SPY": 0.0}
         
         else:
