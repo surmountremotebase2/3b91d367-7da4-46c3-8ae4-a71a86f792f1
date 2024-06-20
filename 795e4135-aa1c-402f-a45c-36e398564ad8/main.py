@@ -28,13 +28,17 @@ class TradingStrategy(Strategy):
         # Get the prices from the same time as now in prior days
         same_time_prices = [i["SPY"]["close"] for i in d if current_time in i["SPY"]["date"]]
         prior_same_time_prices = same_time_prices[-15:-1]
-        current_same_time_price = same_time_prices[-1]
+        current_price = same_time_prices[-1]
 
         # Get the closing prices from prior days
         closing_prices = [i["SPY"]["close"] for i in d if close_time in i["SPY"]["date"]]
         prior_closing_prices = closing_prices[-15:-1]
         current_closing_price = closing_prices[-1]
 
+        if current_time == open_time: 
+            log("Beginning of day, close any positions")
+            allocation = {"SPY": 0.0}
+        
         if current_time == close_time: 
             log("End of day, close any positions")
             allocation = {"SPY": 0.0}
@@ -51,15 +55,22 @@ class TradingStrategy(Strategy):
             # Define lower and upper bounds for initiating position
             upper_bound = max(current_daily_open, current_closing_price) * (1 + avg_relative_price)
             lower_bound = min(current_daily_open, current_closing_price) * (1 - avg_relative_price)
+            log("lower {0}, upper {1}, current {2}".format(lower_bound, upper_bound, current_price))
 
             # Open position if we're outside of bounds
-            if 
+            if current_same_time_price >= upper_bound:
+                log("Upper bound breached")
+                allocation = {"SPY": 1.0}
+
+            elif current_same_time_price <= lower_bound:
+                log("Lower bound breached")
+                 allocation = {"SPY": -1.0}
 
         
         
         
         # Get the historical closing prices for SPY
-        log(str(d[0]))
+        """log(str(d[0]))
         spy_prices = [i["SPY"]["close"] for i in d]
         
         log(str(len(spy_prices)))
@@ -91,7 +102,7 @@ class TradingStrategy(Strategy):
         else:
             # Not enough data to compute SMA, don't allocate
             allocation = {"SPY": 0.0}
-
+        """
         # Log the decision for debugging
         log("SPY Allocation: {}".format(allocation["SPY"]))
         # Return the determined allocation
