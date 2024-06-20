@@ -15,7 +15,7 @@ class TradingStrategy(Strategy):
     
     def run(self, data):
         open_time = "09:30:00"
-        close_time = "16:30:00"
+        close_time = "15:30:00"
         d = data["ohlcv"]
         current_date, current_time = d[-1]["SPY"]["date"].split(" ")
         log("{0}, {1} aa".format(current_date, current_time))
