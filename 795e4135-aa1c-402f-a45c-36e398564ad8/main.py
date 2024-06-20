@@ -18,7 +18,7 @@ class TradingStrategy(Strategy):
         close_time = "16:30:00"
         d = data["ohlcv"]
         current_date, current_time = d[-1]["SPY"]["date"].split(" ")
-        log("{0}, {1}".format(current_date, current_time))
+        log("{0}, {1} aa".format(current_date, current_time))
 
         # Get the daily openings
         daily_opens = [i["SPY"]["open"] for i in d if open_time in i["SPY"]["date"]]
