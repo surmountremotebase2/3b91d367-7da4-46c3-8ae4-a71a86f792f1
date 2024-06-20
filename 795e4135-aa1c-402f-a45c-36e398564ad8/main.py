@@ -48,7 +48,7 @@ class TradingStrategy(Strategy):
             allocation = {"SPY": 1.0}
 
         elif len(prior_daily_opens) != 14 or len(prior_same_time_prices) != 14:
-            log("Not enough data to lookback ({0}, {1})".format(len(prior_daily_opens))), len(prior_same_time_prices))
+            log("Not enough data to lookback ({0}, {1})".format(len(prior_daily_opens), len(prior_same_time_prices)))
             allocation = {"SPY": 0.0}
         
         else:
