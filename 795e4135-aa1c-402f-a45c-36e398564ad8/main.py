@@ -15,7 +15,7 @@ class TradingStrategy(Strategy):
     
     def run(self, data):
         # Get the historical closing prices for SPY
-        log(data["ohlcv"][0])
+        log(str(data["ohlcv"][0]))
         spy_prices = [i["SPY"]["close"] for i in data["ohlcv"]]
         log(str(len(spy_prices)))
         # Check if there are at least 14 days of data to compute SMA
