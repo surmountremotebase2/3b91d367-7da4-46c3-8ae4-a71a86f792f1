@@ -60,18 +60,16 @@ class TradingStrategy(Strategy):
             lower_bound = min(current_daily_open, current_closing_price) * (1 - avg_relative_price)
             log("lower {0}, upper {1}, current {2}".format(lower_bound, upper_bound, current_price))
 
-            # Open position if we're outside of bounds
+            # Open position if we're outside of bounds, otherwise close position
             if current_price >= upper_bound:
                 log("Upper bound breached")
                 allocation = {"SPY": 1.0}
-
             elif current_price <= lower_bound:
                 log("Lower bound breached")
                 allocation = {"SPY": -1.0}
-
             else:
                 allocation = {"SPY": 0.0}
-                
+
         # Get the historical closing prices for SPY
         """log(str(d[0]))
         spy_prices = [i["SPY"]["close"] for i in d]
