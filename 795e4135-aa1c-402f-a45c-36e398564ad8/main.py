@@ -43,8 +43,8 @@ class TradingStrategy(Strategy):
             allocation = {"SPY": 0.0}
         
         elif current_time == close_time: 
-            log("End of day, close any positions")
-            allocation = {"SPY": 0.0}
+            log("End of day, hold over night positions")
+            allocation = {"SPY": 1.0}
 
         elif len(prior_daily_opens) != 14 or len(prior_same_time_prices) != 14:
             log("Not enough data to lookback")
