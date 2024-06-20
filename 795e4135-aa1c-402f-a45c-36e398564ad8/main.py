@@ -24,12 +24,11 @@ class TradingStrategy(Strategy):
             
             # Get the most recent closing price for SPY
             current_price = spy_prices[-1]
-            log(str(current_price))
             
             # Calculate the 5% tolerance thresholds
             upper_bound = spy_sma_14 * 1.01
             lower_bound = spy_sma_14 * 0.99
-
+            log("lower {0}, upper {1}, current {2}".format(lower_bound, upper_bound, current_price))
             # Determine the allocation based on the current price and SMA
             if current_price >= upper_bound:
                 # If the current price is at least 5% higher than the SMA, go 100% long on SPY
