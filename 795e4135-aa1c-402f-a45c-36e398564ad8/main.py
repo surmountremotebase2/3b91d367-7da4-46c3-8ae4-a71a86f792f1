@@ -34,7 +34,7 @@ class TradingStrategy(Strategy):
 
         # Get the closing prices from prior days
         closing_prices = [i["SPY"]["close"] for i in d if close_time in i["SPY"]["date"]]
-        log(str([i["SPY"] for i d[-10:]]))
+        log(str([i["SPY"] for i in d[-10:]]))
         prior_closing_prices = closing_prices[-15:-1]
         current_closing_price = closing_prices[-1]
 
