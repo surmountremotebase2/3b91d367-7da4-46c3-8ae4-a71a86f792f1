@@ -68,7 +68,9 @@ class TradingStrategy(Strategy):
             elif current_price <= lower_bound:
                 log("Lower bound breached")
                 allocation = {"SPY": -1.0}
-        
+
+            else:
+                allocation = {"SPY": 0.0}
         # Get the historical closing prices for SPY
         """log(str(d[0]))
         spy_prices = [i["SPY"]["close"] for i in d]
