@@ -102,7 +102,7 @@ class TradingStrategy(Strategy):
         else:
             # Not enough data to compute SMA, don't allocate
             allocation = {"SPY": 0.0}
-        """
+        """"
         # Log the decision for debugging
         log("SPY Allocation: {}".format(allocation["SPY"]))
         # Return the determined allocation
