@@ -54,6 +54,7 @@ class TradingStrategy(Strategy):
             # Calculate the daily movement in prior day's from respective opening prices
             prior_relative_prices = [abs((i / j) - 1) for i, j in zip(prior_same_time_prices, prior_daily_opens)]
             avg_relative_price = sum(prior_relative_prices) / len(prior_relative_prices)
+            log(str(avg_relative_price))
 
             # Define lower and upper bounds for initiating position
             upper_bound = max(current_daily_open, current_closing_price) * (1 + avg_relative_price)
