@@ -61,11 +61,11 @@ class TradingStrategy(Strategy):
             log("lower {0}, upper {1}, current {2}".format(lower_bound, upper_bound, current_price))
 
             # Open position if we're outside of bounds
-            if current_same_time_price >= upper_bound:
+            if current_price >= upper_bound:
                 log("Upper bound breached")
                 allocation = {"SPY": 1.0}
 
-            elif current_same_time_price <= lower_bound:
+            elif current_price <= lower_bound:
                 log("Lower bound breached")
                 allocation = {"SPY": -1.0}
         
