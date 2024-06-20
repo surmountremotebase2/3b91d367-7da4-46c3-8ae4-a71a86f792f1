@@ -42,7 +42,7 @@ class TradingStrategy(Strategy):
             log("Beginning of day, close any positions")
             allocation = {"SPY": 0.0}
         
-        if current_time == close_time: 
+        elif current_time == close_time: 
             log("End of day, close any positions")
             allocation = {"SPY": 0.0}
 
