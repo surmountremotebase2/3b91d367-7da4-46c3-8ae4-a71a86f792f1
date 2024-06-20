@@ -64,10 +64,7 @@ class TradingStrategy(Strategy):
 
             elif current_same_time_price <= lower_bound:
                 log("Lower bound breached")
-                 allocation = {"SPY": -1.0}
-
-        
-        
+                allocation = {"SPY": -1.0}
         
         # Get the historical closing prices for SPY
         """log(str(d[0]))
