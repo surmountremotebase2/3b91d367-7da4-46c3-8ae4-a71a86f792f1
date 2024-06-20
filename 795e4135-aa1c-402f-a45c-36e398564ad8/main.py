@@ -22,7 +22,7 @@ class TradingStrategy(Strategy):
 
         # Get the daily openings
         daily_opens = [i["SPY"]["open"] for i in d if open_time in i["SPY"]["date"]]
-        #log(str(daily_opens))
+        log(str(daily_opens))
         prior_daily_opens = daily_opens[-15:-1]
         current_daily_open = daily_opens[-1]
 
