@@ -17,8 +17,8 @@ class TradingStrategy(Strategy):
         open_time = "09:30:00"
         close_time = "16:30:00"
         d = data["ohlcv"]
-        current_day, current_time = d[-1]["SPY"]["date"].split(" ")
-        log(str(current_day, current_time))
+        current_date, current_time = d[-1]["SPY"]["date"].split(" ")
+        log("{0}, {1}".format(current_date, current_time))
 
         # Get the daily openings
         daily_opens = [i["SPY"]["open"] for i in d if open_time in i["SPY"]["date"]]
@@ -64,7 +64,7 @@ class TradingStrategy(Strategy):
 
             elif current_same_time_price <= lower_bound:
                 log("Lower bound breached")
-                allocation = {"SPY": -1.0}
+                 allocation = {"SPY": -1.0}
 
         
         
