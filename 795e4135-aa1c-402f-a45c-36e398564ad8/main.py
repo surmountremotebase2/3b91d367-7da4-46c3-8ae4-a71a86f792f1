@@ -64,7 +64,7 @@ class TradingStrategy(Strategy):
 
             elif current_same_time_price <= lower_bound:
                 log("Lower bound breached")
-                 allocation = {"SPY": -1.0}
+                allocation = {"SPY": -1.0}
 
         
         
@@ -102,7 +102,7 @@ class TradingStrategy(Strategy):
         else:
             # Not enough data to compute SMA, don't allocate
             allocation = {"SPY": 0.0}
-        """"
+        """
         # Log the decision for debugging
         log("SPY Allocation: {}".format(allocation["SPY"]))
         # Return the determined allocation
