@@ -11,7 +11,7 @@ class TradingStrategy(Strategy):
     @property
     def interval(self):
         # Define the time interval for data collection
-        return "1day"
+        return "1hour"
     
     def run(self, data):
         # Get the historical closing prices for SPY
