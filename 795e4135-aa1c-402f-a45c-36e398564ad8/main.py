@@ -14,14 +14,59 @@ class TradingStrategy(Strategy):
         return "1hour"
     
     def run(self, data):
+        open_time = "09:30:00"
+        close_time = "16:30:00"
+        d = data["ohlcv"]
+        current_day, current_time = d[-1]["SPY"]["date"].split(" ")
+        log(str(current_day, current_time))
+
+        # Get the daily openings
+        daily_opens = [i["SPY"]["open"] for i in d if open_time in i["SPY"]["date"]]
+        prior_daily_opens = daily_opens[-15:-1]
+        current_daily_open = daily_opens[-1]
+
+        # Get the prices from the same time as now in prior days
+        same_time_prices = [i["SPY"]["close"] for i in d if current_time in i["SPY"]["date"]]
+        prior_same_time_prices = same_time_prices[-15:-1]
+        current_same_time_price = same_time_prices[-1]
+
+        # Get the closing prices from prior days
+        closing_prices = [i["SPY"]["close"] for i in d if close_time in i["SPY"]["date"]]
+        prior_closing_prices = closing_prices[-15:-1]
+        current_closing_price = closing_prices[-1]
+
+        if current_time == close_time: 
+            log("End of day, close any positions")
+            allocation = {"SPY": 0.0}
+
+        elif len(prior_daily_opens) != 14 or len(prior_same_time_closes) != 14:
+            log("Not enough data to lookback")
+            allocation = {"SPY": 0.0}
+        
+        else:
+            # Calculate the daily movement in prior day's from respective opening prices
+            prior_relative_prices = [abs((i / j) - 1) for i, j in zip(prior_same_time_prices, prior_daily_opens)]
+            avg_relative_price = sum(prior_relative_prices) / len(prior_relative_prices)
+
+            # Define lower and upper bounds for initiating position
+            upper_bound = max(current_daily_open, current_closing_price) * (1 + avg_relative_price)
+            lower_bound = min(current_daily_open, current_closing_price) * (1 - avg_relative_price)
+
+            # Open position if we're outside of bounds
+            if 
+
+        
+        
+        
         # Get the historical closing prices for SPY
-        log(str(data["ohlcv"][0]))
-        spy_prices = [i["SPY"]["close"] for i in data["ohlcv"]]
+        log(str(d[0]))
+        spy_prices = [i["SPY"]["close"] for i in d]
+        
         log(str(len(spy_prices)))
         # Check if there are at least 14 days of data to compute SMA
         if len(spy_prices) >= 14:
             # Calculate the 14-day simple moving average for SPY
-            spy_sma_14 = SMA("SPY", data["ohlcv"], 14)[-1]
+            spy_sma_14 = SMA("SPY", d, 14)[-1]
             
             # Get the most recent closing price for SPY
             current_price = spy_prices[-1]
