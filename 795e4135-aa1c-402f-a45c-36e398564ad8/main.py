@@ -22,11 +22,13 @@ class TradingStrategy(Strategy):
 
         # Get the daily openings
         daily_opens = [i["SPY"]["open"] for i in d if open_time in i["SPY"]["date"]]
+        log(str(daily_opens))
         prior_daily_opens = daily_opens[-15:-1]
         current_daily_open = daily_opens[-1]
 
         # Get the prices from the same time as now in prior days
         same_time_prices = [i["SPY"]["close"] for i in d if current_time in i["SPY"]["date"]]
+        log(str(same_time_prices))
         prior_same_time_prices = same_time_prices[-15:-1]
         current_price = same_time_prices[-1]
 
