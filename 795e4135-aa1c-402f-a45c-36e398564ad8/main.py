@@ -16,7 +16,7 @@ class TradingStrategy(Strategy):
     def run(self, data):
         # Get the historical closing prices for SPY
         spy_prices = [i["SPY"]["close"] for i in data["ohlcv"]]
-        
+        log(len(spy_prices))
         # Check if there are at least 14 days of data to compute SMA
         if len(spy_prices) >= 14:
             # Calculate the 14-day simple moving average for SPY
@@ -24,10 +24,11 @@ class TradingStrategy(Strategy):
             
             # Get the most recent closing price for SPY
             current_price = spy_prices[-1]
-
+            log(current_price)
+            
             # Calculate the 5% tolerance thresholds
-            upper_bound = spy_sma_14 * 1.05
-            lower_bound = spy_sma_14 * 0.95
+            upper_bound = spy_sma_14 * 1.01
+            lower_bound = spy_sma_14 * 0.99
 
             # Determine the allocation based on the current price and SMA
             if current_price >= upper_bound:
